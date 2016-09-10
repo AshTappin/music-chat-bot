@@ -1,7 +1,8 @@
 'use strict'
-console.log('AshBot is here to party')
+console.log('Good ol\' chumbot is here to party')
 const http = require('http')
 const Bot = require('messenger-bot')
+const responseSupplier = require('./responseSuppier.js')
 
 let bot = new Bot({
   token: 'EAABsDeRgE64BALNjtMPjoBopOOGL2ZBYmPtUe03ZBK1jlKZBYZBPE0ZCbKNRAtdYXLDNmMrYuyxRSKRWOy6MQme0tl0XMQAXaTXPdviNnctUjy7j8qBZBY34PVccW8JNHVVybJL2qKW4CRN6qKEuMO4vMOZBZCcxoR5MlZASmUNRC9QZDZD',
@@ -13,13 +14,18 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
-  let text = "I am a noosh boot"
-
   bot.getProfile(payload.sender.id, (err, profile) => {
+
+  	let text = responseSupplier.getResponse(payload.message.text, profile.first_name);
+  	console.log(text)
+
     if (err) throw err
 
-    reply({ text }, (err) => {
-      if (err) throw err
+    reply({text}, (err) => {
+      if (err) {
+      	console.log(err);
+      	throw err;
+      }
 
       console.log(`Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`)
     })
