@@ -1,4 +1,4 @@
-var responseSupplier = require('./responseSuppier');
+var responseSupplier = require('./greetingResponseSuppier');
 
 describe("ResponseSupplier",function() {
 	it('Responds to \'hello\'', function() {
