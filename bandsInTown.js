@@ -1,8 +1,10 @@
 const request = require("request");
+const config = require("./config").bandsintown;
+const apihost = config.apihost;
 
 const bandsInTown = {
 	getNextEvent : function(artistName, callback, errorCallback) {
-		request(`http://api.bandsintown.com/artists/${artistName}/events.json?api_version=2.0&app_id=YOUR_APP_ID`,
+		request(`${apihost}artists/${artistName}/events/search.json?api_version=2.0&app_id=YOUR_APP_ID&location=use_geoip`,
 		 (error, response, body) => {
 		 	var nextEvent = {};
 		 	try {
@@ -16,7 +18,7 @@ const bandsInTown = {
 				console.log(`bandsInTown: ${e}`)
 				return errorCallback(artistName);
 			} 
-			console.log(nextEvent)
+			
 			return callback(artistName, nextEvent);
 		});	
 	}

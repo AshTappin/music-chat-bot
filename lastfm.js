@@ -1,6 +1,7 @@
 const request = require("request");
-const apiHost = "http://ws.audioscrobbler.com/2.0/" 
-const apiKey = "cfa1cc4b9f3cff34dec8d289cbe2f8f9"
+const config = require("./config").lastfm
+const apiHost = config.apihost; 
+const apiKey = config.apikey;
 
 const lastfm = {
 	getTopFiveArtistsThisMonth : function(username, callback, errorCallback) {
@@ -11,7 +12,7 @@ const lastfm = {
 		 (error, response, body) => {
 		 	try {
 		 		var artists = JSON.parse(body).topartists.artist;
-				var artistName = JSON.parse(body).topartists.artist[0].name;
+				var artistName = JSON.parse(body).topartists.artist[4].name;
 			} catch (e) {
 				console.log(`getTopArtistThisWeekError: ${e}`);
 				return errorCallback(username);
