@@ -1,0 +1,23 @@
+{
+  "name": "samuel-bot",
+  "version": "1.0.0",
+  "description": "\"Samuel is a bot which can talk to you about music. They (Samuel has no gender) can recommend you shows and albums based on what you listen to\"",
+  "main": "app.js",
+  "dependencies": {
+    "messenger-bot": "^2.3.0",
+    "request": "^2.74.0"
+  },
+  "devDependencies": {
+  	"jasmine-node": "^1.14.5"
+  },
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/ashley_tappin/ash-bot.git"
+  },
+  "author": "AT",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/ashley_tappin/ash-bot#readme"
+}
