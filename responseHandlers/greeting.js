@@ -1,4 +1,10 @@
 var GreetingResponseSupplier = {
+
+	process : function(incomingGreeting, successCallback) {
+
+		return successCallback();
+	},
+
 	getResponse : function(payloadMessage, recipient) {
 
 			var knownHellos = [
