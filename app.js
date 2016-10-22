@@ -1,8 +1,9 @@
-'use strict'
+/*jshint esversion: 6 */
+'use strict';
 console.log("Good ol\' nosh bot is here to party");
 const http = require('http');
 const Bot = require('messenger-bot');
-const config = require('./config.js').messenger
+const config = require('./config.js').messenger;
 const greetingResponseSupplier = require('./greetingResponseSuppier.js');
 const lastFm = require('./lastfm.js');
 const bandsInTown = require('./bandsInTown.js');
@@ -20,7 +21,6 @@ bot.on('error', (err) => {
 bot.on('message', (payload, reply) => {
   console.dir(payload)
   bot.getProfile(payload.sender.id, (err, profile) => {
-    
     console.dir(profile)
   	if (conversationStage === "GREET") {
   		var greeting = greetingResponseSupplier.getResponse(payload.message.text, profile.first_name);
