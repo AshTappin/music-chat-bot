@@ -1,26 +1,24 @@
 var GreetingResponseSupplier = {
 
-	process : function(incomingGreeting, successCallback) {
+	process : function(incomingGreeting, successCallback, errorCallback) {
+		const greeting = incomingGreeting.toLowerCase();
 
-		return successCallback();
-	},
+		return greetingIsUnderstood(greeting) 
+		? successCallback()
+		: errorCallback();
 
-	getResponse : function(payloadMessage, recipient) {
-
-			var knownHellos = [
+		function greetingIsUnderstood(greeting) {
+			const knownHellos = [
 		  		'hello',
 		  		'hi',
 		  		'hey',
 		  		'bonsoir',
-		  		'good evening'
+		  		'good evening',
+		  		'guten tag'
 		  	];
-	  	if (knownHellos.indexOf(payloadMessage.toLowerCase())>=0) {
-			return `Hello ${recipient}, my name is Samuel and I am a robot that has been developed `
-			+ `to shoot the shit about music with non-bots like you. `
-			+ `If you don't mind me asking, what is your lastfm username? I would like to stalk your lastfm `
-			+ `for a moment before actually talking to you`;
-	  	} 
- 
+		  	return !knownHellos.every((word) => { return !greeting.startsWith(word)})
+		}
+
 	}
 };
 
