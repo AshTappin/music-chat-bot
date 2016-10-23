@@ -4,7 +4,7 @@ console.log("Good ol\' nosh bot is here to party");
 const http = require('http');
 const Bot = require('messenger-bot');
 const config = require('./config.js').messenger;
-const greetingResponseSupplier = require('./greetingResponseSuppier.js');
+const greetingProcesser = require('./responseHandlers/greeting.js');
 const lastFm = require('./lastfm.js');
 const bandsInTown = require('./bandsInTown.js');
 var conversationStage = "GREET";
@@ -23,13 +23,22 @@ bot.on('message', (payload, reply) => {
   bot.getProfile(payload.sender.id, (err, profile) => {
     console.dir(profile)
   	if (conversationStage === "GREET") {
-  		var greeting = greetingResponseSupplier.getResponse(payload.message.text, profile.first_name);
-	  	let text = `I do not understand the term "${payload.message.text}"`
-	  	if (greeting) {
-	  		conversationStage = "LASTFM";
-	  		text = greeting; 
-	  	}
-	  	replyToPerson(reply, text, profile);
+      let response;
+      let senderName = profile.first_name;
+  		var greeting = greetingProcesser.process(payload.message.text, 
+        function() {
+          conversationStage = "LASTFM";
+          response = `Hello ${senderName}, my name is Samuel and I am a robot that has been developed `
+        + `to shoot the shit about music with non-bots like you. `
+        + `If you don't mind me asking, what is your lastfm username? I would like to stalk your lastfm `
+        + `for a moment before actually talking to you`;
+        replyToPerson(reply, response, profile);
+
+        },
+        function() {
+          response = `${senderName}, I do not understand the term "${payload.message.text}"`
+          replyToPerson(reply, response, profile);
+        });
 	} else {  	
   		lastFm.getTopFiveArtistsThisMonth(payload.message.text, 
 
