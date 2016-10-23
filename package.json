@@ -10,7 +10,9 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-jasmine": "^2.4.2",
     "gulp-jshint": "^2.0.1",
+    "gulp-watch": "^4.3.10",
     "jasmine-node": "^1.14.5",
     "jshint": "^2.9.4"
   },
