@@ -1,5 +1,5 @@
 const request = require("request");
-const config = require("./config").lastfm
+const config = require("../config").lastfm
 const apiHost = config.apihost; 
 const apiKey = config.apikey;
 

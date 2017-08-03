@@ -1,5 +1,5 @@
 const request = require("request");
-const config = require("./config").bandsintown;
+const config = require("../config").bandsintown;
 const apihost = config.apihost;
 
 const bandsInTown = {

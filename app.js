@@ -1,22 +1,27 @@
-/*jshint esversion: 6 */
+ /*jshint esversion: 6 */
 'use strict';
-console.log("Good ol\' nosh bot is here to party");
+console.log("Good ol\' music bot is here to party");
+
 const http = require('http');
 const Bot = require('messenger-bot');
 const config = require('./config.js').messenger;
+
 const greetingProcesser = require('./responseHandlers/greeting.js');
-const lastFm = require('./lastfm.js');
-const bandsInTown = require('./bandsInTown.js');
+const lastFm = require('./responseHandlers/lastfm.js');
+const bandsInTown = require('./responseHandlers/bandsInTown.js');
+
 var conversationStage = "GREET";
 
 const bot = new Bot({
-  token: 'EAABsDeRgE64BALNjtMPjoBopOOGL2ZBYmPtUe03ZBK1jlKZBYZBPE0ZCbKNRAtdYXLDNmMrYuyxRSKRWOy6MQme0tl0XMQAXaTXPdviNnctUjy7j8qBZBY34PVccW8JNHVVybJL2qKW4CRN6qKEuMO4vMOZBZCcxoR5MlZASmUNRC9QZDZD',
-  verify: 'VERIFY_TOKEN'
+  token: config.apiKey,
+  verify: config.verifyToken,
 })
 
 bot.on('error', (err) => {
   console.log(err.message)
 })
+
+//ToDO Plan to refactor this to use Mongo
 
 bot.on('message', (payload, reply) => {
   console.dir(payload)
